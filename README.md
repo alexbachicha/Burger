@@ -18,7 +18,7 @@
 - [Instructions](#Instructions)
 - [Demo](#Demo)
 - [Licence](#Licence)
-- [Repository](#Repository)
+- [Contributions](#Contributions)
 
 ## Installation
 
