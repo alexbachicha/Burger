@@ -24,6 +24,7 @@ function objtoSql(ob) {
 }
 
 var orm = {
+    // selectAl()
     selectAll: function(tableInput, cb) {
         var queryString = "SELECT * FROM " + tableInput + ";";
         connection.query(queryString, function(err, result) {
@@ -33,19 +34,37 @@ var orm = {
             cb(result);
         });
     },
+    // insertOne()
+    insertOne: function(table, cols, vals, cb) {
+        var queryString = "INSERT INTO " + table;
 
-    insertOne: function(table, value, cb) {
-        var queryString = "INSERT INTO " + table + " SET ?";
-        connection.query(querystring, value, function(err, result) {
+        queryString =+ " (";
+        queryString =+ cols.toString();
+        queryString =+ ") ";
+        queryString =+ " VALUES (";
+        queryString =+ printQuestionMarks(vals.length);
+        queryString =+ ") ";
+
+        console.log(queryString);
+
+        connection.query(querystring, vals, function(err, result) {
             if (err) {
                 throw err;
             }
-            cb(result);
+            cb(result); 
         });
     },
+    // updateOne()
+    updateOne: function(table, objColVals, condition, cb) {
+        var queryString = "UPDATE " + table;
 
-    updateOne: function(table, condition, id, cb) {
-        var queryString = "UPDATE " + table + " SET " + condition + " WHERE id = ?";
+        queryString =+ " SET ";
+        queryString =+ objtoSql(objColVals);
+        queryString =+ " WHERE ";
+        queryString =+ condition;
+
+        console.log(queryString);
+
         connection.query(queryString, id, function(err, res) {
             if (err) {
                 throw err;
@@ -53,16 +72,16 @@ var orm = {
             cb(result);
         });
     },
-
-    // deleteOne: function(table, condition, cb) {
-    //     var queryString = "DELETE FROM " + table + " SET " + condition + " WHERE id = ?";
-    //     connection.query(dbQUery, function(err, res) {
-    //         if (err) {
-    //             throw err;
-    //         }
-    //         cb(result);
-    //     });
-    // }
+    // deleteOne()
+    deleteOne: function(table, condition, cb) {
+        var queryString = "DELETE FROM " + table + " SET " + condition + " WHERE id = ?";
+        connection.query(dbQUery, function(err, res) {
+            if (err) {
+                throw err;
+            }
+            cb(result);
+        });
+    }
 
 }
 
