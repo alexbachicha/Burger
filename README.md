@@ -1,6 +1,7 @@
 # Eat-Da-Burger Application
 
 ![GitHub License](https://img.shields.io/badge/made%20by-%40alexbachicha-orange)
+![TopLanguage](https://img.shields.io/github/languages/top/alexbachicha/burger)
 
 ## Description
 
@@ -15,16 +16,35 @@
 ## Table of Contents 
 
 - [Installation](#Installation)
-- [Instructions](#Instructions)
-- [Demo](#Demo)
 - [Licence](#Licence)
 - [Contributions](#Contributions)
 
 ## Installation
 
-## Instructions 
+To run the Burger application locally, first clone this reposity by envoking the following command:
+
+```
+git glone git@github.com:alexbachicha/burger.git
+```
+
+Then, install the following dependencies:
+
+```
+cd burger
+npm install
+```
+
+Finally, run the node server locally:
+
+```
+node server.js
+```
+
+The application can now be opened and run on port 8080 using the following url: http://localhost:8080/
 
 ## License
+
+![MITlicense](https://img.shields.io/npm/l/express)
 
 ## Contributions
 
