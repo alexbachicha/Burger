@@ -24,7 +24,7 @@
 To run the Burger application locally, first clone this reposity by envoking the following command:
 
 ```
-git glone git@github.com:alexbachicha/burger.git
+git glone https://github.com/alexbachicha/Burger.git
 ```
 
 Then, install the following dependencies:
