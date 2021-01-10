@@ -8,37 +8,54 @@ var burger = require("../models/burger.js");
 var router = express.Router();
 
 // Routes
-// GET
+// Index
 router.get("/", function(req, res) {
-    burger.selectAll(function(data) {
-        var hbsObject = {
-            burger: data
-        };
-        console.log(hbsObject);
-        res.render("index", hbsObject);
+    res.redirect("/burgers");
+})
+
+// GET
+router.get("/burgers", function(req, res) {
+    burger.selectAll(function(burgerData) {
+        res.render("index", { burger_data: burgerData});
+    });
+    // burger.selectAll(function(data) {
+    //     var hbsObject = {
+    //         burger: data
+    //     };
+    //     console.log(hbsObject);
+    //     res.render("index", hbsObject);
+    // });
+});
+
+// POST
+router.post("/burgers/create", function(req, res) {
+    burger.create(req.body.burger_name, function(result) {
+        console.log(result);
+        res.redirect("/");
+        // res.json({ id: result.insertId });
     });
 });
-// POST
-router.post("/api/burgers", function(req, res) {
-    burger.create(req.body.burger_name, function(result) {
-        res.json({ id: result.insertId });
-    })
-});
-// PUT
-router.put("/api/burgers/:id", function(req, res) {
-    var condition = "id = " + req.params.id;
 
-    burger.update(
-        { 
-            devoured: req.body.devoured 
-        }, condition, function(result) {
-        if (result.changedRows === 0) {
-            return res.status(404).end();
-        } else {
-            res.status(200).end();
-        }
-    })
+// PUT
+router.put("/burgers/:id", function(req, res) {
+    burger.updateOne(req.params.id, function(result) {
+        console.log(result);
+        res.sendStatus(200);
+    });
+    // var condition = "id = " + req.params.id;
+
+    // burger.update(
+    //     { 
+    //         devoured: req.body.devoured 
+    //     }, condition, function(result) {
+    //     if (result.changedRows === 0) {
+    //         return res.status(404).end();
+    //     } else {
+    //         res.status(200).end();
+    //     }
+    // })
 });
+
 // DELETE
 router.delete("/api/burgers/:id", function(req, res) {
     var condition = "id = " + req.params.id;
